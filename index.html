@@ -1,82 +1,138 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Kiosk</title>
+  <title>kiosk</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css">
   <style>
     /* Styles CSS pour la mise en page */
     body {
       font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
     }
 
-    h1, h2 {
-      margin-bottom: 10px;
+    .ui.container {
+      max-width: 800px;
     }
 
-    select {
+    h1 {
+      text-align: center;
       margin-bottom: 20px;
     }
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      cursor: pointer;
+    .ui.grid.cards {
+      margin-top: 20px;
+    }
+
+    .ui.card {
+      width: 100%;
+    }
+
+    .ui.dropdown {
+      width: 100%;
+    }
+
+    .ui.button {
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Bonjour, chosissez votre repas.</h1>
+  <div class="ui container">
+    <h1>Bienvenue ! Choisissez votre</h1>
 
-  <h2>Entrée</h2>
-  <select id="entree">
-    <option value="salade">Salade</option>
-    <option value="soupe">Soupe</option>
-    <option value="bruschetta">Bruschetta</option>
-  </select>
+    <div class="ui grid cards">
+      <div class="four wide column">
+        <div class="ui card">
+          <div class="content">
+            <div class="header">Entrée</div>
+            <div class="description">
+              <select id="entree" class="ui dropdown">
+                <option value="salade">Salade</option>
+                <option value="soupe">Soupe</option>
+                <option value="bruschetta">Bruschetta</option>
+                <option value="autre">autre</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <h2>Plat</h2>
-  <select id="plat">
-    <option value="poulet">Poulet</option>
-    <option value="poisson">Poisson</option>
-    <option value="steak">Steak</option>
-  </select>
+      <div class="four wide column">
+        <div class="ui card">
+          <div class="content">
+            <div class="header">Plat</div>
+            <div class="description">
+              <select id="plat" class="ui dropdown">
+                <option value="poulet">Poulet</option>
+                <option value="poisson">Poisson</option>
+                <option value="steak">Steak</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <h2>Dessert</h2>
-  <select id="dessert">
-    <option value="gateau">Gateau</option>
-    <option value="glace">Glace</option>
-    <option value="tarte">Tarte</option>
-  </select>
+      <div class="four wide column">
+        <div class="ui card">
+          <div class="content">
+            <div class="header">Dessert</div>
+            <div class="description">
+              <select id="dessert" class="ui dropdown">
+                <option value="gateau">Gateau</option>
+                <option value="glace">Glace</option>
+                <option value="tarte">Tarte</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <h2>Boisson</h2>
-  <select id="boisson">
-    <option value="eau">Eau</option>
-    <option value="soda">Soda</option>
-    <option value="jus">Jus</option>
-  </select>
+      <div class="four wide column">
+        <div class="ui card">
+          <div class="content">
+            <div class="header">Boisson</div>
+            <div class="description">
+              <select id="boisson" class="ui dropdown">
+                <option value="eau">Eau</option>
+                <option value="soda">Soda</option>
+                <option value="jus">Jus</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <button id="validerCommande">Valider la commande</button>
+    <button id="validerCommande" class="ui primary button">Valider la commande</button>
+  </div>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.js"></script>
   <script>
-    document.getElementById("validerCommande").addEventListener("click", function() {
-      var entree = document.getElementById("entree").value;
-      var plat = document.getElementById("plat").value;
-      var dessert = document.getElementById("dessert").value;
-      var boisson = document.getElementById("boisson").value;
+    $(document).ready(function() {
+      $('.ui.dropdown').dropdown();
+      
+      $('#validerCommande').click(function() {
+        var entree = $('#entree').val();
+        var plat = $('#plat').val();
+        var dessert = $('#dessert').val();
+        var boisson = $('#boisson').val();
 
-      var commande = {
-        entree: entree,
-        plat: plat,
-        dessert: dessert,
-        boisson: boisson
-      };
+        var commande = {
+          entree: entree,
+          plat: plat,
+          dessert: dessert,
+          boisson: boisson
+        };
 
-      // Enregistrement de la commande dans le stockage local
-      localStorage.setItem("commande", JSON.stringify(commande));
+        // Enregistrement de la commande dans le stockage local
+        localStorage.setItem('commande', JSON.stringify(commande));
 
-      alert("Votre commande a été enregistrée avec succès !");
+        alert('Votre commande a été enregistrée avec succès !');
+      });
     });
   </script>
 </body>
