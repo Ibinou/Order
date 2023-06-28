@@ -1,15 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>StandBy</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Kiosk</title>
+  <style>
+    /* Styles CSS pour la mise en page */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+
+    select {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <div id="clock" class="landscape">
-    <div id="time">00:00</div>
-  </div>
+  <h1>Bonjour, chosissez votre repas.</h1>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-  <script src="script.js"></script>
+  <h2>Entrée</h2>
+  <select id="entree">
+    <option value="salade">Salade</option>
+    <option value="soupe">Soupe</option>
+    <option value="bruschetta">Bruschetta</option>
+  </select>
+
+  <h2>Plat</h2>
+  <select id="plat">
+    <option value="poulet">Poulet</option>
+    <option value="poisson">Poisson</option>
+    <option value="steak">Steak</option>
+  </select>
+
+  <h2>Dessert</h2>
+  <select id="dessert">
+    <option value="gateau">Gateau</option>
+    <option value="glace">Glace</option>
+    <option value="tarte">Tarte</option>
+  </select>
+
+  <h2>Boisson</h2>
+  <select id="boisson">
+    <option value="eau">Eau</option>
+    <option value="soda">Soda</option>
+    <option value="jus">Jus</option>
+  </select>
+
+  <button id="validerCommande">Valider la commande</button>
+
+  <script>
+    document.getElementById("validerCommande").addEventListener("click", function() {
+      var entree = document.getElementById("entree").value;
+      var plat = document.getElementById("plat").value;
+      var dessert = document.getElementById("dessert").value;
+      var boisson = document.getElementById("boisson").value;
+
+      var commande = {
+        entree: entree,
+        plat: plat,
+        dessert: dessert,
+        boisson: boisson
+      };
+
+      // Enregistrement de la commande dans le stockage local
+      localStorage.setItem("commande", JSON.stringify(commande));
+
+      alert("Votre commande a été enregistrée avec succès !");
+    });
+  </script>
 </body>
 </html>
