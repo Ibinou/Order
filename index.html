@@ -107,7 +107,7 @@
     </div>
 
     <button id="validerCommande" class="ui primary button">Valider la commande</button>
-    <button id="reinitialiserCommandes" class="ui secondary button">Réinitialiser les commandes</button>
+    <button id="reinitialiserCommandes" class="ui secondary button" style="float: left;margin-top: 600px;">Réinitialiser (ne pas toucher)</button>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -139,7 +139,7 @@
 
         localStorage.setItem('commandes', JSON.stringify(commandes));
 
-        alert('Votre commande a été enregistrée avec succès !');
+        alert('Votre commande a été enregistrée avec succès 🥳');
 
         afficherCommandes();
       });
