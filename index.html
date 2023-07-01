@@ -106,6 +106,8 @@
       </div>
     </div>
 
+   
+
     <button id="validerCommande" class="ui primary button">Valider la commande</button>
     <button id="reinitialiserCommandes" class="ui secondary button" style="float: left;margin-top: 600px;">Réinitialiser (ne pas toucher)</button>
   </div>
@@ -122,26 +124,35 @@
       }
 
       $('#validerCommande').click(function() {
+        var prenom = $('#prenom').val();
         var entree = $('#entree').val();
         var plat = $('#plat').val();
         var dessert = $('#dessert').val();
         var boisson = $('#boisson').val();
 
-        var commande = {
-          entree: entree,
-          plat: plat,
-          dessert: dessert,
-          boisson: boisson
-        };
+        // Afficher la popup pour demander le prénom
+        var prenom = prompt("Veuillez entrer votre prénom :");
 
-        var commandes = JSON.parse(localStorage.getItem('commandes')) || [];
-        commandes.push(commande);
+        if (prenom) {
+          var commande = {
+            prenom: prenom,
+            entree: entree,
+            plat: plat,
+            dessert: dessert,
+            boisson: boisson
+          };
 
-        localStorage.setItem('commandes', JSON.stringify(commandes));
+          var commandes = JSON.parse(localStorage.getItem('commandes')) || [];
+          commandes.push(commande);
 
-        alert('Votre commande a été enregistrée avec succès 🥳');
+          localStorage.setItem('commandes', JSON.stringify(commandes));
 
-        afficherCommandes();
+          alert('Votre commande a été enregistrée avec succès 🥳');
+
+          afficherCommandes();
+        } else {
+          alert("Veuillez entrer un prénom valide !");
+        }
       });
 
       $('#reinitialiserCommandes').click(function() {
