@@ -41,7 +41,7 @@
 </head>
 <body>
   <div class="ui container">
-    <h1>Bienvenue ! Choisissez votre</h1>
+    <h1>Bienvenue ! Choisissez votre menu :)</h1>
 
     <div class="ui grid cards">
       <div class="four wide column">
@@ -107,6 +107,7 @@
     </div>
 
     <button id="validerCommande" class="ui primary button">Valider la commande</button>
+    <button id="reinitialiserCommandes" class="ui secondary button">Réinitialiser les commandes</button>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -115,6 +116,11 @@
     $(document).ready(function() {
       $('.ui.dropdown').dropdown();
       
+      function afficherCommandes() {
+        var commandes = JSON.parse(localStorage.getItem('commandes'));
+        console.log(commandes);
+      }
+
       $('#validerCommande').click(function() {
         var entree = $('#entree').val();
         var plat = $('#plat').val();
@@ -128,10 +134,19 @@
           boisson: boisson
         };
 
-        // Enregistrement de la commande dans le stockage local
-        localStorage.setItem('commande', JSON.stringify(commande));
+        var commandes = JSON.parse(localStorage.getItem('commandes')) || [];
+        commandes.push(commande);
+
+        localStorage.setItem('commandes', JSON.stringify(commandes));
 
         alert('Votre commande a été enregistrée avec succès !');
+
+        afficherCommandes();
+      });
+
+      $('#reinitialiserCommandes').click(function() {
+        localStorage.removeItem('commandes');
+        console.log('Les commandes ont été réinitialisées.');
       });
     });
   </script>
