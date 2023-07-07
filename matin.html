@@ -45,7 +45,7 @@
   <div class="ui container">
     <h1>Bienvenue ! Choisissez votre petit déjeuner.</h1>
 
-    <div class="ui grid cards" style="transform: translateX(141px);">
+    <div class="ui grid cards">
       <div class="four wide column">
         <div class="ui card">
           <div class="content">
@@ -59,7 +59,23 @@
           </div>
         </div>
       </div>
-
+    <div class="four wide column">
+        <div class="ui card">
+          <div class="content">
+            <div class="header">Boisson</div>
+            <div class="description">
+              <select id="boisson" class="ui dropdown">
+                <option value="cafegrand">Grand Café</option>
+                <option value="cafepetit">Petit Café</option>
+                <option value="jusorange">Jus d'orange</option>
+                <option value="the">Thé - Russian</option>
+                <option value="eau">Eau</option>
+                <option value="non">Non merci</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="four wide column">
         <div class="ui card">
           <div class="content">
@@ -76,7 +92,7 @@
       <div class="four wide column">
         <div class="ui card">
           <div class="content">
-            <div class="header">Tartine</div>
+            <div class="header">Tartine au beurre</div>
             <div class="description">
               <select id="tartine" class="ui dropdown">
                 <option value="oui">Oui</option>
@@ -110,6 +126,7 @@
         var oeuf = $('#oeuf').val();
         var bacon = $('#bacon').val();
         var tartine = $('#tartine').val();
+        var boisson = $('#boisson').val();
         
 
         // Afficher la popup pour demander le prénom
@@ -120,6 +137,7 @@
             prenom: prenom,
             oeuf: oeuf,
             bacon: bacon,
+            boisson: boisson,
             tartine: tartine
           };
 
