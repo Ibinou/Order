@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>kiosk</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css">
+  <meta name="viewport"content="initial-scale=1, viewport-fit=cover, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <style>
+    /* Styles CSS pour la mise en page */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    .ui.container {
+      max-width: 800px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .ui.grid.cards {
+      margin-top: 20px;
+    }
+
+    .ui.card {
+      width: 100%;
+    }
+
+    .ui.dropdown {
+      width: 100%;
+    }
+
+    .ui.button {
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ui container">
+    <h1>Bienvenue ! Choisissez votre petit déjeuner.</h1>
+
+    <div class="ui grid cards">
+      <div class="four wide column">
+        <div class="ui card">
+          <div class="content">
+            <div class="header">Oeuf au plat</div>
+            <div class="description">
+              <select id="oeuf" class="ui dropdown">
+                <option value="oui">Oui</option>
+                <option value="non">Non merci</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="four wide column">
+        <div class="ui card">
+          <div class="content">
+            <div class="header">Boisson</div>
+            <div class="description">
+              <select id="boisson" class="ui dropdown">
+                <option value="cafegrand">Grand Café</option>
+                <option value="cafepetit">Petit Café</option>
+                <option value="jusorange">Jus d'orange</option>
+                <option value="the">Thé - Russian</option>
+                <option value="eau">Eau</option>
+                <option value="non">Non merci</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="four wide column">
+        <div class="ui card">
+          <div class="content">
+            <div class="header">Bacon</div>
+            <div class="description">
+              <select id="bacon" class="ui dropdown">
+                <option value="oui">Oui</option>
+                <option value="non">Non merci</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="four wide column">
+        <div class="ui card">
+          <div class="content">
+            <div class="header">Tartine au beurre</div>
+            <div class="description">
+              <select id="tartine" class="ui dropdown">
+                <option value="oui">Oui</option>
+                <option value="non">non</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  
+    <button id="validerCommande" class="ui primary button">Valider la commande</button>
+    <button id="reinitialiserCommandes" class="ui secondary button" style="float: left;margin-top: 600px;">Réinitialiser (ne pas toucher)</button>
+  
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.ui.dropdown').dropdown();
+      
+      function afficherCommandes() {
+        var commandes = JSON.parse(localStorage.getItem('commandes'));
+        console.log(commandes);
+      }
+
+      $('#validerCommande').click(function() {
+        var prenom = $('#prenom').val();
+        var oeuf = $('#oeuf').val();
+        var bacon = $('#bacon').val();
+        var tartine = $('#tartine').val();
+        var boisson = $('#boisson').val();
+        
+
+        // Afficher la popup pour demander le prénom
+        var prenom = prompt("Veuillez entrer votre prénom :");
+
+        if (prenom) {
+          var commande = {
+            prenom: prenom,
+            oeuf: oeuf,
+            bacon: bacon,
+            boisson: boisson,
+            tartine: tartine
+          };
+
+          var commandes = JSON.parse(localStorage.getItem('commandes')) || [];
+          commandes.push(commande);
+
+          localStorage.setItem('commandes', JSON.stringify(commandes));
+
+          alert('Votre commande a été enregistrée avec succès 🥳');
+
+          afficherCommandes();
+        } else {
+          alert("Veuillez entrer un prénom valide !");
+        }
+      });
+
+      $('#reinitialiserCommandes').click(function() {
+        localStorage.removeItem('commandes');
+        console.log('Les commandes ont été réinitialisées.');
+      });
+    });
+  </script>
+</body>
+</html>
